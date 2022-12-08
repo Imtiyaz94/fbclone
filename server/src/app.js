@@ -10,9 +10,9 @@ connectDB();
 const app = express();
 
 // middleware setup
-app.use(cookieParser());
-app.use(cors());
 app.use(json());
+app.use(cors());
+app.use(cookieParser());
 
 // routes
 app.use('/api/auth', authRoutes);
