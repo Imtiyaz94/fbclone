@@ -13,6 +13,6 @@ const connectDB = async () => {
 // const db = mongoose.connection;
 // db.on('error', console.error.bind(console, "Error"))
 // db.once('open', ()=>{
-
 // })
+mongoose.set('strictQuery', true);
 export default connectDB;

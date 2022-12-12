@@ -24,7 +24,3 @@ export const generateAuthToken = async (user) => {
 };
 
 export default generateAuthToken;
-// const token = jwt.sign({ _id: this._id }, process.env.PRIVATE_KEY, {
-//   expiresIn: '7d',
-// });
-// return token;
