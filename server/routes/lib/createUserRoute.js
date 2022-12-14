@@ -36,14 +36,15 @@ const schema = Joi.object({
 
 export const createUserRoute = async (req, res) => {
   try {
-    const { error, value } = schema.validate(req.body);
+    const { error, value } = await schema.validate(req.body);
     if (error) {
-      return res.status(400).send({ message: error.message });
+      const response = errorHandler(error.message);
+      return res.status(400).send(response);
     }
     const createUsers = await createUser(value);
     if (createUsers.error) {
       const response = errorHandler('Data Not Sent');
-      return res.status(401).send(response);
+      return res.status(403).send(response);
     }
     const response = {
       error: false,
@@ -51,8 +52,8 @@ export const createUserRoute = async (req, res) => {
     };
     return res.status(200).send(response);
   } catch (error) {
-    console.log('error', error);
+    console.log(error, 'error');
     const response = errorHandler('Bad Request');
-    res.status(500).send(response);
+    return res.status(400).send(response);
   }
 };
