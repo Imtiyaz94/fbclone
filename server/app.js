@@ -12,7 +12,7 @@ import YAML from 'yamljs';
 const swaggerDocument = YAML.load('./api.yaml');
 connectDB();
 const app = express();
-
+// require('crypto').randomBytes(64).toString('hex');
 // Swagger Docs integeratin
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));

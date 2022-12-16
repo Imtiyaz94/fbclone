@@ -41,13 +41,15 @@ export const createUserRoute = async (req, res) => {
       const response = errorHandler(error.message);
       return res.status(400).send(response);
     }
+
     const createUsers = await createUser(value);
-    if (createUsers.error) {
-      const response = errorHandler('Data Not Sent');
-      return res.status(403).send(response);
-    }
+    // if (createUsers.error) {
+    //   const response = errorHandler('user already created');
+    //   return res.status(403).send(response);
+    // }
     const response = {
       error: false,
+      // message: 'User Created Successfully',
       createUsers,
     };
     return res.status(200).send(response);

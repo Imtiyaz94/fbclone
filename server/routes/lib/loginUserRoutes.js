@@ -1,9 +1,33 @@
 import Joi from 'joi';
+import { authenticate } from '../../src/utils/lib/auth/index.js';
+import { errorHandler } from '../../src/utils/lib/errors/errorHandling.js';
 
 const schema = Joi.object({
   email: Joi.string().email().required().label('Email'),
   password: Joi.string().required().label('Password'),
 });
-return schema.validate(data);
+// return schema.validate(data);
 
-export const loginUserRoutes = async () => {};
+export const loginUserRoutes = async (req, res) => {
+  try {
+    const { error, value } = await schema.validate(req.body);
+    // console.log('value', value.email);
+    if (error) {
+      return res.status(400).send({ message: error.message });
+    }
+    const checkAuth = await authenticate(value);
+    if (checkAuth.error) {
+      const resp = errorHandler(checkAuth.message);
+      return res.status(401).send(resp);
+    }
+    const response = {
+      error: false,
+      email: checkAuth.email,
+      token: checkAuth.token,
+    };
+    return res.status(200).send(response);
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send('Internal Server Error', error);
+  }
+};

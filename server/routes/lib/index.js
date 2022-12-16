@@ -1,3 +1,3 @@
 import { createUserRoute } from './createUserRoute.js';
-
-export { createUserRoute };
+import { loginUserRoutes } from './loginUserRoutes.js';
+export { createUserRoute, loginUserRoutes };

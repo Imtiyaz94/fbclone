@@ -1,3 +1,3 @@
-import { encrypt } from './encrypt.js';
-
-export { encrypt };
+import { encrypt, checkPassword, generateAuthToken } from './lib/index.js';
+import { authenticate } from './authenticate.js';
+export { authenticate, encrypt, checkPassword, generateAuthToken };

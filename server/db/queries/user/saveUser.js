@@ -1,5 +1,5 @@
 import { User } from '../../models/index.js';
-import { encrypt } from '../../../src/utils/lib/auth/encrypt.js';
+import { encrypt } from '../../../src/utils/lib/auth/lib/index.js';
 
 const saveUser = async (value) => {
   const hashPassword = await encrypt(value.password);
