@@ -22,8 +22,7 @@ export const loginUserRoutes = async (req, res) => {
     }
     const response = {
       error: false,
-      email: checkAuth.email,
-      token: checkAuth.token,
+      token: checkAuth.accessToken,
     };
     return res.status(200).send(response);
   } catch (error) {

@@ -1,9 +1,9 @@
 import { Usertoken } from '../../models/index.js';
 
-export const saveToken = async (user) => {
+export const saveToken = async ({ accessToken, userId }) => {
   const token = await Usertoken.create({
-    token: user.token,
-    userId: user.userId,
+    token: accessToken,
+    userId: userId,
   });
   return token;
 };

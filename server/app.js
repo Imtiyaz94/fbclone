@@ -7,6 +7,7 @@ import mongoose from 'mongoose';
 // import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import authRoutes from './routes/index.js';
+import { homeRoute } from './routes/lib/index.js';
 import cookieParser from 'cookie-parser';
 import YAML from 'yamljs';
 const swaggerDocument = YAML.load('./api.yaml');
@@ -20,9 +21,10 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(json());
 app.use(cors());
 app.use(cookieParser());
+
 // routes
 app.use('/api/auth', authRoutes);
-
+app.use('/api', homeRoute);
 mongoose.connection.once('open', () => {
   console.log('Connected to MongoDB');
   app.listen(process.env.PORT, (err) => {

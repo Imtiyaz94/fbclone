@@ -4,7 +4,7 @@ import { saveToken } from '../../../../../db/queries/user/index.js';
 export const generateAuthToken = async (checkUser) => {
   const { _id } = checkUser;
   const userId = checkUser;
-  console.log('payload', { _id });
+  console.log('payload', _id);
   const accessToken = await jwt.sign({ _id }, process.env.PRIVATE_KEY, {
     expiresIn: '15m',
   });
