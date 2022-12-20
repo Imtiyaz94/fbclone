@@ -1,3 +1,6 @@
 import User from './User.js';
 import Usertoken from './UserToken.js';
-export { User, Usertoken };
+import Post from './Post.js';
+
+// exporting our file
+export { User, Usertoken, Post };

@@ -5,14 +5,13 @@ export const generateAuthToken = async (checkUser) => {
   const { _id } = checkUser;
   const userId = checkUser;
   console.log('payload', _id);
-  const accessToken = await jwt.sign({ _id }, process.env.PRIVATE_KEY, {
-    expiresIn: '15m',
-  });
-  // const expiredAt = new Date();
-  // expiredAt.setSeconds(expiredAt.getSeconds() + 3600);
+  const accessToken = await jwt.sign({ _id }, process.env.PRIVATE_KEY);
+  const expiredAt = new Date();
+  expiredAt.setSeconds(expiredAt.getSeconds() + 30);
   const newToken = await saveToken({
     accessToken,
     userId,
+    expiryDate: expiredAt,
   });
   return { error: false, message: 'token is created', newToken };
 };

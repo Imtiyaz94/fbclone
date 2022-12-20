@@ -9,9 +9,13 @@ const UserTokenSchema = new mongoose.Schema({
     type: String,
   },
   createdAt: {
-    type: Date,
+    type: Number,
     default: Date.now,
-    expires: 30 * 86400, // 30days
+    // expires: 30 * 86400, // 30days
+  },
+  expiryDate: {
+    type: Number,
+    default: Date.now,
   },
 });
 const UserToken = mongoose.model('UserToken', UserTokenSchema);

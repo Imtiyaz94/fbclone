@@ -10,7 +10,7 @@ export const authenticate = async (value) => {
   }
 
   // confirm password
-  console.log('userdb pass', user.password);
+  // console.log('userdb pass', user.password);
   // const user = await existedUser();
   const confPass = await checkPassword(password, user.password);
   if (!confPass) {

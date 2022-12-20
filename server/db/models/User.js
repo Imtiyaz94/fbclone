@@ -21,6 +21,11 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    photos: {
+      data: Buffer,
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,

@@ -1,9 +1,9 @@
 import express from 'express';
 import { createUserRoute, homeRoute, loginUserRoutes } from './lib/index.js';
-import { validateToken } from '../src/utils/lib/auth/lib/validateToken.js';
+import { auth } from '../middelwares/auth.js';
 const router = express.Router();
 
-router.get('/', validateToken, homeRoute);
+router.get('/home', auth, homeRoute);
 router.post('/register', createUserRoute);
 router.post('/login', loginUserRoutes);
 export default router;
