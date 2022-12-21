@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
-const UserSchema = new mongoose.Schema(
+const UserSchema = new Schema(
   {
     username: {
       type: String,
@@ -25,6 +25,10 @@ const UserSchema = new mongoose.Schema(
       data: Buffer,
       type: String,
       required: true,
+    },
+    posts: {
+      type: Schema.Types.ObjectId,
+      ref: 'Post',
     },
   },
   {

@@ -5,5 +5,23 @@ import {
   saveToken,
   findAll,
   findById,
+  storage,
+  findUser,
+  findAndUpdate,
 } from './user/index.js';
-export { existedUser, saveUser, findByEmail, saveToken, findAll, findById };
+
+import { savePost } from './post/index.js';
+
+// exporting our module files
+export {
+  existedUser,
+  saveUser,
+  findByEmail,
+  saveToken,
+  findAll,
+  findById,
+  storage,
+  savePost,
+  findUser,
+  findAndUpdate,
+};

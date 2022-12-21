@@ -11,13 +11,21 @@ import authRoutes from './routes/index.js';
 import cookieParser from 'cookie-parser';
 import YAML from 'yamljs';
 const swaggerDocument = YAML.load('./api.yaml');
+
+import path from 'path';
+import { fileURLToPath } from 'url';
+
 connectDB();
 const app = express();
-// require('crypto').randomBytes(64).toString('hex');
-// Swagger Docs integeratin
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
+// require('crypto').randomBytes(64).toString('hex');
+
+// Swagger Docs integeratin
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // middleware setup
+app.use(express.static(__dirname + '/server/uploads'));
 app.use(json());
 app.use(cors());
 app.use(cookieParser());

@@ -8,6 +8,7 @@ const saveUser = async (value) => {
     email: value.email,
     password: hashPassword,
     gender: value.gender,
+    photos: value.photos,
   });
   return newUser;
 };

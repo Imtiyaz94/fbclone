@@ -9,7 +9,7 @@ export const createUser = async (value) => {
   if (existUser) {
     return { error: true, message: 'User already exists' };
   }
-  const checkedMail = await findByEmail();
+  const checkedMail = await findByEmail(value.email);
   if (checkedMail) {
     return { error: true, message: 'Mail already exists' };
   }

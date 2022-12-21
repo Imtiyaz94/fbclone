@@ -1,5 +1,6 @@
 import multer from 'multer';
 import path from 'path';
+
 export const storage = async () => {
   const storage = multer.diskStorage({
     destination: '../../../uploads/user',
@@ -10,4 +11,5 @@ export const storage = async () => {
       );
     },
   });
+  return storage;
 };

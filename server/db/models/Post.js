@@ -9,7 +9,6 @@ const PostSchema = new mongoose.Schema({
     type: String,
   },
   photos: {
-    data: Buffer,
     type: String,
   },
   createdAt: {
@@ -18,5 +17,5 @@ const PostSchema = new mongoose.Schema({
     // expires: 30 * 86400, // 30days
   },
 });
-const Post = mongoose.model('PostSchema', PostSchema);
+const Post = mongoose.model('Post', PostSchema);
 export default Post;

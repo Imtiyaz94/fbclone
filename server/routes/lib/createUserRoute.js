@@ -32,6 +32,7 @@ const schema = Joi.object({
     .label('Confirm password')
     .options({ messages: { 'any.only': '{{#label}} does not match' } }),
   gender: Joi.string().trim(true),
+  photos: Joi.any().label('Only .png, .jpg and .jpeg format are allowed'),
 });
 
 export const createUserRoute = async (req, res) => {
