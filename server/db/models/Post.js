@@ -8,12 +8,22 @@ const PostSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
-  text: {
-    type: String,
-  },
-  photos: {
-    type: String,
-  },
+  like: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
+  ],
+  text: [
+    {
+      type: String,
+    },
+  ],
+  photos: [
+    {
+      type: String,
+    },
+  ],
   createdAt: {
     type: Number,
     default: Date.now,
