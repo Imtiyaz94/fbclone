@@ -32,24 +32,29 @@ const schema = Joi.object({
     .label('Confirm password')
     .options({ messages: { 'any.only': '{{#label}} does not match' } }),
   gender: Joi.string().trim(true),
-  photos: Joi.any().label('Only .png, .jpg and .jpeg format are allowed'),
+  // profilePic: Joi.string().label(
+  //   'Only .png, .jpg and .jpeg format are allowed',
+  // ),
 });
 
 export const createUserRoute = async (req, res) => {
   try {
     const { error, value } = await schema.validate(req.body);
     // const { path } = await req.file;
-    // console.log('user photos', path);
+    const images = await req.file.filename;
+
+    // console.log('user photos', images);
     if (error) {
       const response = errorHandler(error.message);
       return res.status(400).send(response);
     }
 
-    const createUsers = await createUser({ value });
-
+    const createUsers = await createUser({ value, images });
+    if (!createUser) {
+      const response = errorHandler(error.message);
+      return res.status(400).send(response);
+    }
     const response = {
-      error: false,
-      message: 'User Created Successfully',
       createUsers,
     };
     return res.status(200).send(response);

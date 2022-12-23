@@ -15,22 +15,18 @@ export const createPosts = async ({ value, userId, images }) => {
       //   $push: { posts: savingPost },
       // },
     );
-    console.log('body user', value);
+    // console.log('body user', value);
     if (!postInUser) {
-      const response = {
-        error: true,
-        message: 'please login first',
-      };
-      return response;
-    } else {
-      const response = {
-        error: false,
-        message: 'Post Created Successfully',
-        savingPost,
-        postInUser,
-      };
-      return response;
+      return { error: true, message: 'Please Login First' };
     }
+    const response = {
+      error: false,
+      message: 'Post Created Successfully',
+      savingPost,
+      postInUser,
+    };
+    return response;
+
     // console.log('user name with post', postInUser);
   } catch (error) {
     return { error: true, message: error };
