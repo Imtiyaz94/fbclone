@@ -13,6 +13,10 @@ const UserTokenSchema = new mongoose.Schema({
     default: Date.now,
     // expires: 30 * 86400, // 30days
   },
+  isDelete: {
+    type: Boolean,
+    default: false,
+  },
   expiryDate: {
     type: Number,
     default: Date.now,

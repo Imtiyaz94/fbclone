@@ -5,7 +5,7 @@ import {
   saveToken,
   findAll,
   findById,
-  storage,
+  multerUploads,
   findUser,
   findAndUpdate,
 } from './user/index.js';
@@ -20,7 +20,7 @@ export {
   saveToken,
   findAll,
   findById,
-  storage,
+  multerUploads,
   savePost,
   findUser,
   findAndUpdate,

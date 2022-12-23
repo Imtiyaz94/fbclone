@@ -4,7 +4,7 @@ import {
   findByEmail,
 } from '../../../db/queries/index.js';
 
-export const createUser = async (value) => {
+export const createUser = async ({ value, path }) => {
   const existUser = await existedUser(value.username);
   if (existUser) {
     return { error: true, message: 'User already exists' };
@@ -15,6 +15,7 @@ export const createUser = async (value) => {
   }
   const newUser = await saveUser({
     ...value,
+    path,
   });
   const response = {
     error: false,

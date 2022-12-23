@@ -38,19 +38,18 @@ const schema = Joi.object({
 export const createUserRoute = async (req, res) => {
   try {
     const { error, value } = await schema.validate(req.body);
+    // const { path } = await req.file;
+    // console.log('user photos', path);
     if (error) {
       const response = errorHandler(error.message);
       return res.status(400).send(response);
     }
 
-    const createUsers = await createUser(value);
-    // if (createUsers.error) {
-    //   const response = errorHandler('user already created');
-    //   return res.status(403).send(response);
-    // }
+    const createUsers = await createUser({ value });
+
     const response = {
       error: false,
-      // message: 'User Created Successfully',
+      message: 'User Created Successfully',
       createUsers,
     };
     return res.status(200).send(response);

@@ -25,7 +25,7 @@ const __dirname = path.dirname(__filename);
 // Swagger Docs integeratin
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // middleware setup
-app.use(express.static(__dirname + '/server/uploads'));
+app.use('/uploads', express.static(__dirname + '/uploads'));
 app.use(json());
 app.use(cors());
 app.use(cookieParser());

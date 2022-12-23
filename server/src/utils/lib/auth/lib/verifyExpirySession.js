@@ -1,6 +1,4 @@
-export const verifyExpirySession = async (expiryDate) => {
-  (await expiryDate) < Date.now();
+export const verifyExpirySession = (expiryDate) => {
   console.log('expiry date', expiryDate);
-
-  //   return expiredAt;
+  return expiryDate < Date.now();
 };

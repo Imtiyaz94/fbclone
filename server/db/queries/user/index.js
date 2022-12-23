@@ -4,9 +4,9 @@ import { findByEmail } from './findByEmail.js';
 import { saveToken } from './saveToken.js';
 import { findAll } from './findAll.js';
 import { findById } from './fintById.js';
-import { storage } from './storage.js';
+import { multerUploads } from './storage.js';
 import { findUser } from './findUser.js';
-import { findAndUpdate } from './findByIdAndUpdate.js';
+import { findAndUpdate } from './findAndUpdate.js';
 
 export {
   existedUser,
@@ -15,7 +15,7 @@ export {
   saveToken,
   findAll,
   findById,
-  storage,
+  multerUploads,
   findUser,
   findAndUpdate,
 };
