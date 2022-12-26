@@ -3,6 +3,7 @@ import {
   createPostRoute,
   createUserRoute,
   homeRoute,
+  likePost,
   loginUserRoutes,
 } from './lib/index.js';
 import path from 'path';
@@ -29,5 +30,5 @@ router.post(
 router.get('/:id/posts');
 
 // routes for Like by user
-router.post('/like');
+router.post('/:id/like', auth, likePost);
 export default router;

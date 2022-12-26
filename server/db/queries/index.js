@@ -8,9 +8,10 @@ import {
   multerUploads,
   findUser,
   findAndUpdate,
+  
 } from './user/index.js';
 
-import { savePost } from './post/index.js';
+import { savePost, saveLike } from './post/index.js';
 
 // exporting our module files
 export {
@@ -24,4 +25,5 @@ export {
   savePost,
   findUser,
   findAndUpdate,
+  saveLike,
 };

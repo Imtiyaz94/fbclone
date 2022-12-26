@@ -8,17 +8,15 @@ const PostSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
-  like: [
+  likes: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'User',
+      ref: 'Like',
     },
   ],
-  text: [
-    {
-      type: String,
-    },
-  ],
+  text: {
+    type: String,
+  },
   photos: [
     {
       type: String,

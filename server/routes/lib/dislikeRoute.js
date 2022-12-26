@@ -7,5 +7,5 @@ export const dislike = async (req, res) => {
       $pull: { like: req.user._id },
     },
     { new: true },
-  ).exec;
+  );
 };
