@@ -16,8 +16,8 @@ export const createPostRoute = async (req, res, next) => {
       const response = errorHandler(error.message);
       return res.status(400).send(response);
     }
-    const userId = await req.params.id;
-    // console.log('req id', req.params.id);
+    const userId = await req.user;
+    // console.log('req id', req.user);
 
     const createPost = await createPosts({ value, userId, images });
     // const response = {

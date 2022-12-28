@@ -11,10 +11,6 @@ const LikeSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'Post',
   },
-  like: {
-    type: Boolean,
-    default: false,
-  },
   createdAt: {
     type: Number,
     default: Date.now,

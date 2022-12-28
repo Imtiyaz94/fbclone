@@ -1,18 +1,19 @@
-import { Like, Post } from '../../db/models/index.js';
-import { findUser } from '../../db/queries/index.js';
-import { findPost } from '../../db/queries/post/findPost.js';
-import { createLike } from '../../src/app/posts/createLike.js';
+import { createLike } from '../../src/app/posts/index.js';
+import { errorHandler } from '../../src/utils/lib/errors/errorHandling.js';
 
 export const likePost = async (req, res) => {
   try {
     const postId = await req.params.id;
-    console.log('post id', postId);
-    co
-    const userId = await findUser(req.user.id);
-    console.log('like user id', userId);
+    // console.log('post id', postId);
+    // const userId = await findUser(req.user.id);
+    const { userId } = req.user;
+    // console.log('like user id', userId);
 
-    const createLike = await createLike({ postId, userId });
+    const like = await createLike({ postId, userId });
+    return res.status(200).send(like);
   } catch (error) {
-    return res.status(403).send({ error: error });
+    console.log(error, 'error');
+    const response = errorHandler('Bad Request');
+    return res.status(400).send(response);
   }
 };

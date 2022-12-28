@@ -6,11 +6,7 @@ import {
   likePost,
   loginUserRoutes,
 } from './lib/index.js';
-import path from 'path';
-
 import { auth } from '../middelwares/auth.js';
-// import { multerUploads } from '../src/utils/lib/auth/index.js';
-import multer from 'multer';
 import { multerUploads } from '../db/queries/index.js';
 
 const router = express.Router();
