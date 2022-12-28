@@ -1,13 +1,28 @@
-import { Like } from '../../models/index.js';
+import { errorHandler } from '../../../src/utils/lib/errors/errorHandling.js';
+import { Like, Post } from '../../models/index.js';
 
-export const saveLike = async ({userId, post}) => {
-  console.log('saving likes');
-  const likeCreate = await Like.create({ userId: userId, postId: post });
-  console.log('like create', likeCreate);
-  post.updateOne(
-    {
-      $push: { likes: likeCreate },
-    },
-    { new: true },
-  );
+export const saveLike = async ({ userId, postId }) => {
+  console.log('saving likes', userId._id, postId);
+  const post = await Post.findById(postId).select([
+    '_id',
+    'userId',
+    'likeCount',
+  ]);
+  const likedUser = await Like.findOne({ userId: userId, postId: post._id });
+  // console.log('liked user', likedUser);
+
+  if (!post) {
+    return errorHandler(401, 'Post not found');
+  }
+  if (likedUser) {
+    await Like.findOneAndDelete({ postId: postId, userId: userId });
+    post.likeCount--;
+    await post.save();
+
+    return errorHandler(200, 'Post disliked');
+  }
+  const likeCreate = await Like.create({ userId: userId, postId: postId });
+  post.likeCount++;
+  await post.save();
+  return errorHandler(200, 'Post liked', likeCreate);
 };

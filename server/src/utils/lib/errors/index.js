@@ -1,2 +1,2 @@
-import { errorHandler } from './errorHandling.js';
-export { errorHandler };
+import {errorHandler} from './errorHandling.js';
+export  { errorHandler };
