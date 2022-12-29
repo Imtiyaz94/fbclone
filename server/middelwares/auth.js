@@ -1,7 +1,8 @@
-import { findById } from '../db/queries/index.js';
-import { verifyExpirySession } from '../src/utils/lib/auth/index.js';
+import UserQueries from '../db/queries/user/index.js';
+import auths from '../src/utils/lib/auth/lib/index.js';
 import { errorHandler } from '../src/utils/lib/errors/errorHandling.js';
 import { Usertoken } from '../db/models/index.js';
+
 export const auth = async (req, res, next) => {
   const token = req.headers.authorization;
   if (!token) {
@@ -14,7 +15,7 @@ export const auth = async (req, res, next) => {
       .send({ error: true, message: 'Token not found in DB' });
   }
   console.log('expiry date', dbToken);
-  const expireSession = await verifyExpirySession(dbToken.expiryDate);
+  const expireSession = await auths.verifyExpirySession(dbToken.expiryDate);
   console.log('expire token session', expireSession);
   if (expireSession) {
     const response = errorHandler('Token is Expired');

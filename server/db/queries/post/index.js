@@ -2,4 +2,10 @@ import { savePost } from './savePost.js';
 import { findPost } from './findPost.js';
 import { saveLike } from './saveLike.js';
 
-export { savePost, findPost, saveLike };
+const PostQueries = {};
+
+PostQueries.saveLike = saveLike;
+PostQueries.savePost = savePost;
+PostQueries.findPost = findPost;
+
+export default PostQueries;
