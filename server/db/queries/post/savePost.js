@@ -1,4 +1,4 @@
-import { Post } from '../../../db/models/index.js';
+import { Post } from '../../models/index.js';
 
 export const savePost = async ({ value, userId, images }) => {
   try {
