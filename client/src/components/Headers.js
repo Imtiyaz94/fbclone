@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Header = () => {
+const Headers = () => {
   return (
     <div>
       <h2>FB Clone</h2>
@@ -8,4 +8,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Headers;
