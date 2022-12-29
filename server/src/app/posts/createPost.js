@@ -1,15 +1,13 @@
-import {
-  findAndUpdate,
-  findUser,
-  savePost,
-} from '../../../db/queries/index.js';
+import UserQueries from '../../../db/queries/user/index.js';
+import PostQueries from '../../../db/queries/post/index.js';
+import Post from '../../../db/queries/user/index.js';
 import User from '../../../db/models/User.js';
 import { errorHandler } from '../../utils/lib/errors/errorHandling.js';
 
 export const createPosts = async ({ value, userId, images }) => {
   try {
-    const savingPost = await savePost({ value, userId, images });
-    const postInUser = await findAndUpdate(
+    const savingPost = await PostQueries.savePost({ value, userId, images });
+    const postInUser = await UserQueries.findAndUpdate(
       { _id: userId },
       // {
       //   $push: { posts: savingPost },

@@ -7,20 +7,20 @@ import {
   loginUserRoutes,
 } from './lib/index.js';
 import { auth } from '../middelwares/auth.js';
-import { multerUploads } from '../db/queries/index.js';
+import UserQueries from '../db/queries/user/index.js';
 
 const router = express.Router();
 
 // User auth
 router.get('/home', auth, homeRoute);
-router.post('/register', multerUploads.single('profilePic'), createUserRoute);
+router.post('/register',UserQueries.multerUploads.single('profilePic'), createUserRoute);
 router.post('/login', loginUserRoutes);
 
 // routes for Post by user
 router.post(
   '/:id/create_post',
   auth,
-  multerUploads.single('photos'),
+  UserQueries.multerUploads.single('photos'),
   createPostRoute,
 );
 router.get('/:id/posts');

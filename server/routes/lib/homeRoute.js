@@ -1,11 +1,11 @@
 import { Post } from '../../db/models/index.js';
-import { findById } from '../../db/queries/index.js';
-import { findAll } from '../../db/queries/user/findAll.js';
+import UserQueries from '../../db/queries/user/index.js';
 
 export const homeRoute = async (req, res, next) => {
-  const users = await findAll({});
+  const users = await UserQueries.findAll({});
   const userName = users.map((user) => user.username);
   console.log('username', userName);
+
   let posts = await Post.find()
     .sort('-createdAt')
     .populate('userId')

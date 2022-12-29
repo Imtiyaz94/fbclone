@@ -1,22 +1,18 @@
-import {
-  saveUser,
-  existedUser,
-  findByEmail,
-} from '../../../db/queries/index.js';
+import UserQueries from '../../../db/queries/user/index.js';
 
 export const createUser = async ({ value, images }) => {
   try {
-    const existUser = await existedUser(value.username);
+    const existUser = await UserQueries.existedUser(value.username);
     if (existUser) {
       return { error: true, message: 'User already exists' };
     }
-    const checkedMail = await findByEmail(value.email);
+    const checkedMail = await UserQueries.findByEmail(value.email);
     if (checkedMail) {
       return { error: true, message: 'Mail already exists' };
     }
     const userImage = await images;
     // console.log('userimage', userImage);
-    const newUser = await saveUser(
+    const newUser = await UserQueries.saveUser(
       {
         ...value,
       },

@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { saveToken } from '../../../../../db/queries/user/index.js';
+import  UserQueries  from '../../../../../db/queries/user/index.js';
 
 export const generateAuthToken = async (checkUser) => {
   const { _id } = checkUser;
@@ -8,7 +8,7 @@ export const generateAuthToken = async (checkUser) => {
   const accessToken = await jwt.sign({ _id }, process.env.PRIVATE_KEY);
   const expiredAt = new Date();
   const time = expiredAt.setSeconds(expiredAt.getSeconds() + 1800);
-  const newToken = await saveToken({
+  const newToken = await UserQueries.saveToken({
     accessToken,
     userId,
     expiryDate: time,

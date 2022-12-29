@@ -8,14 +8,16 @@ import { multerUploads } from './storage.js';
 import { findUser } from './findUser.js';
 import { findAndUpdate } from './findAndUpdate.js';
 
-export {
-  existedUser,
-  saveUser,
-  findByEmail,
-  saveToken,
-  findAll,
-  findById,
-  multerUploads,
-  findUser,
-  findAndUpdate,
-};
+const UserQueries  = {}
+
+UserQueries.existedUser = existedUser
+UserQueries.saveUser = saveUser
+UserQueries.findByEmail = findByEmail
+UserQueries.saveToken = saveToken
+UserQueries.findAll = findAll
+UserQueries.findById = findById
+UserQueries.multerUploads = multerUploads
+UserQueries.findUser = findUser
+UserQueries.findAndUpdate = findAndUpdate
+
+export default UserQueries

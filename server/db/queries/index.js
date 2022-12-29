@@ -1,29 +1,4 @@
-import {
-  existedUser,
-  saveUser,
-  findByEmail,
-  saveToken,
-  findAll,
-  findById,
-  multerUploads,
-  findUser,
-  findAndUpdate,
-  
-} from './user/index.js';
-
-import { savePost, saveLike } from './post/index.js';
-
+import PostQueries from './post/index.js';
+import UserQueries from './user/index.js';
 // exporting our module files
-export {
-  existedUser,
-  saveUser,
-  findByEmail,
-  saveToken,
-  findAll,
-  findById,
-  multerUploads,
-  savePost,
-  findUser,
-  findAndUpdate,
-  saveLike,
-};
+export default { PostQueries, UserQueries };
