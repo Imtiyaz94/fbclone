@@ -1,30 +1,33 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import { Home, Signin, Signup } from './pages/index';
-import { Headers, Sidebar, Footers } from './components/index';
-import { Layout } from 'antd';
+// import { Layout } from 'antd';
 
-const { Header, Footer, Sider, Content } = Layout;
+// const { Header, Footer, Sider, Content } = Layout;
 
 function App() {
   return (
-    <div className='container-fluid'>
-      <Layout>
-        <Header>
+    <div>
+      {/* <Layout>
+        <Header style={{ background: '#f5f5f5' }}>
           <Headers />
         </Header>
         <Layout>
-          <Sider>
+          <Sider className='sidebar' style={{ background: '#f5f5f5' }}>
             <Sidebar />
           </Sider>
-          <Content>
-            <Home />
+          <Content className='main'>
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/login' element={<Signin />} />
+              <Route path='/register' element={<Signup />} />
+            </Routes>
           </Content>
         </Layout>
         <Footer>
           <Footers />
         </Footer>
-      </Layout>
+      </Layout> */}
 
       <Routes>
         <Route path='/' element={<Home />} />
