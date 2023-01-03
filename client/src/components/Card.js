@@ -1,37 +1,61 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 const Card = () => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState({});
+  // console.log('type', typeof data);
+  // const posts = Object.entries(data).reduce((acc, curr) => {
+  //   const [key, val] = curr;
+  //   acc.push({
+  //     name: key,
+  //     ...val,
+  //   });
+  //   return acc;
+  // }, []);
+  // console.log('posts', posts);
 
-  useEffect(() => {
+  const getData = () => {
     const user = JSON.parse(localStorage.getItem('access_token'));
     const token = user.newToken.token;
     const headers = { Authorization: `${token}` };
-    const users = axios.get('http://localhost:8001/api/auth/home', {
-      headers: headers,
-    });
-    setData(users.data);
-    console.log('users data', users);
+    axios
+      .get('http://localhost:8001/api/auth/home', {
+        headers: headers,
+      })
+      .then((res) => {
+        setData(res.data.posts);
+        // console.log('users data', res.data.posts);
+      })
+      .catch((err) => console.log(err));
+  };
+  useEffect(() => {
+    getData();
   }, []);
+
   return (
-    <div>
-      {data &&
-        data.map((info) => {
-          console.log('user info', info);
-          return (
-            <div className='card w-50 h-100 shadow ' id='card'>
-              <div className='card-body'>
-                <h5 className='card-title'>{info.username}</h5>
-                <p className='card-text'>This is a first post.</p>
-                <img src='...' className='card-img-top' alt='...' />
-              </div>
-              <div className='card-footer'>
-                <small className='text-muted'>Last updated 3 mins ago</small>
-              </div>
-            </div>
-          );
-        })}
-    </div>
+    <>
+      {Object.keys(data).forEach((item) => {
+        // console.log('user info', data[item]);
+
+        <div className='card w-50 h-100 shadow ' id='card'>
+          <li key={item}></li>
+          <div className='card-body'>
+            <h5 className='card-title'>{data[item].userId.username}</h5>
+            <p className='card-text'>{data[item].text}</p>
+            <img
+              src={data[item].photos[0]}
+              className='card-img-top'
+              alt='...'
+            />
+          </div>
+          <div className='card-footer'>
+            <small className='text-muted'>{data[item].likeCount}</small>
+            <button>Like</button>
+          </div>
+
+        </div>;
+      })}
+      <h3>hello</h3>
+    </>
   );
 };
 

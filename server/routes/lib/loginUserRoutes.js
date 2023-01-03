@@ -11,7 +11,7 @@ const schema = Joi.object({
 export const loginUserRoutes = async (req, res) => {
   try {
     const { error, value } = await schema.validate(req.body);
-    // console.log('value', value.email);
+    console.log('value', value.email);
     if (error) {
       return res.status(400).send({ message: error.message });
     }

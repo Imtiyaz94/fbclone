@@ -1,5 +1,6 @@
 import React from 'react';
 import { Headers, Sidebar, Card } from '../components/index';
+import { Outlet } from 'react-router-dom';
 
 const Home = () => {
   return (
@@ -9,19 +10,9 @@ const Home = () => {
         <Sidebar />
         <div className='main shadow-sm rounded'>
           <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />  
         </div>
       </div>
+      {/* <Outlet /> */}
     </div>
   );
 };
