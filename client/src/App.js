@@ -6,6 +6,7 @@ import { Home, Signin, Signup } from './pages/index';
 // const { Header, Footer, Sider, Content } = Layout;
 
 function App() {
+  const isLogged = localStorage.getItem('access_token');
   return (
     <div>
       {/* <Layout>
@@ -30,6 +31,17 @@ function App() {
       </Layout> */}
 
       <Routes>
+        {/* {isLogged ? (
+          <Route path='/' element={<Home />} />
+        ) : (
+          <Route path='/login' element={<Signin />} />
+        )} */}
+        {/* <Route path='/' element={isLogged ? <Home /> : <Signin />} /> */}
+        {/* {isLogged ? (
+            <Route path='/' element={<Home />} />
+          ) : (
+            <Route path='/login' element={<Signin />} />
+          )} */}
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Signin />} />
         <Route path='/register' element={<Signup />} />

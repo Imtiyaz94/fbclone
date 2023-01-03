@@ -6,6 +6,7 @@ import swal from 'sweetalert';
 const Signin = () => {
   const navigate = useNavigate();
   const [error, setError] = useState('');
+  const [token, setToken] = useState('');
   const [user, setUser] = useState({
     email: '',
     password: '',
@@ -13,7 +14,7 @@ const Signin = () => {
   // const [email, setEmail] = useState('');
   // const [password, setPassword] = useState('');
   const handleInput = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     const { name, value } = e.target;
     setUser({
       ...user,
@@ -21,18 +22,21 @@ const Signin = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
+    // console.log('resData');
     try {
       const res = await axios.post(
         'http://localhost:8001/api/auth/login',
         user,
       );
 
-      console.log('resData', res.data.message);
-      localStorage.setItem('access_token', JSON.stringify(res.data.token));
-
-      setError(res.data.message);
+      const token = localStorage.setItem(
+        'access_token',
+        JSON.stringify(res.data.token),
+      );
+      setToken(token);
+      // setError(res.data.message);
       if (res.data.token) {
         localStorage.setItem('token', res.data.token);
         // alert('User logged in successfully');
@@ -76,8 +80,11 @@ const Signin = () => {
     // } catch (error) {
     //   console.log('error', error);
     // }
-  };
-
+  }
+  // useEffect(() => {
+  //   handleSubmit();
+  // });
+  // const submit = useCallback
   // useEffect(() => {
   //   const submit = async () => {
   //     try {
@@ -112,11 +119,11 @@ const Signin = () => {
   return (
     <div className='container mt-5 p-3 shadow-sm ' id='signup-form'>
       <div className='form-heading h2 text-center'>Sign In</div>
-      <form onSubmit={handleSubmit}>
+      <form>
         <div className='mb-3'>
-          {/* <label htmlFor='email' className='form-label'>
+          <label htmlFor='email' className='form-label'>
             Email address
-          </label> */}
+          </label>
           <input
             type='email'
             className='form-control'
@@ -132,9 +139,9 @@ const Signin = () => {
           </div>
         </div>
         <div className='mb-3'>
-          {/* <label htmlFor='password' className='form-label'>
+          <label htmlFor='password' className='form-label'>
             Password
-          </label> */}
+          </label>
           <input
             type='password'
             name='password'
@@ -145,7 +152,11 @@ const Signin = () => {
             required
           />
         </div>
-        <button type='submit' className='btn btn-primary'>
+        <button
+          type='submit'
+          onClick={handleSubmit}
+          className='btn btn-primary'
+        >
           Login
         </button>
       </form>
