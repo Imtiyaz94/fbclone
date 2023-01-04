@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { Home, Signin, Signup } from './pages/index';
 // import { Layout } from 'antd';
 
@@ -42,8 +42,14 @@ function App() {
           ) : (
             <Route path='/login' element={<Signin />} />
           )} */}
-        <Route path='/' element={<Home />} />
-        <Route path='/login' element={<Signin />} />
+        <Route
+          path='/'
+          element={!isLogged ? <Navigate to='/login' replace /> : <Home />}
+        />
+        <Route
+          path='/login'
+          element={isLogged ? <Navigate to='/' replace /> : <Signin />}
+        />
         <Route path='/register' element={<Signup />} />
       </Routes>
     </div>
