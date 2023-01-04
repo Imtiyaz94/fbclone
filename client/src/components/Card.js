@@ -13,13 +13,19 @@ const Card = () => {
   // }, []);
   // console.log('posts', posts);
 
-  const getData = () => {
+  const getData = async () => {
     const user = JSON.parse(localStorage.getItem('access_token'));
     const token = user.newToken.token;
-    const headers = { Authorization: `${token}` };
+    // const headers = {
+    //   Authorization: `${token}`,
+    //   'Content-Type': 'application/json',
+    // };
     axios
-      .get('http://localhost:8001/api/auth/home', {
-        headers: headers,
+      .get('http://localhost:8000/api/auth/posts', {
+        headers: {
+          Authorization: `${token}`,
+          'Content-Type': 'application/json',
+        },
       })
       .then((res) => {
         setData(res.data.posts);
@@ -33,25 +39,20 @@ const Card = () => {
 
   return (
     <>
-      {Object.keys(data).forEach((item) => {
-        // console.log('user info', data[item]);
+      {Object.values(data).forEach((item) => {
+        console.log('user info', item);
 
         <div className='card w-50 h-100 shadow ' id='card'>
-          <li key={item}></li>
+          <li key={item._id}></li>
           <div className='card-body'>
-            <h5 className='card-title'>{data[item].userId.username}</h5>
-            <p className='card-text'>{data[item].text}</p>
-            <img
-              src={data[item].photos[0]}
-              className='card-img-top'
-              alt='...'
-            />
+            <h5 className='card-title'>{item.userId.username}</h5>
+            <p className='card-text'>{item.text}</p>
+            <img src={item.photos[0]} className='card-img-top' alt='...' />
           </div>
           <div className='card-footer'>
-            <small className='text-muted'>{data[item].likeCount}</small>
+            <small className='text-muted'>{item.likeCount}</small>
             <button>Like</button>
           </div>
-
         </div>;
       })}
       <h3>hello</h3>

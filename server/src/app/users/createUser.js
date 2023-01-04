@@ -1,6 +1,6 @@
 import UserQueries from '../../../db/queries/user/index.js';
 
-export const createUser = async ({ value, images }) => {
+export async function createUser({ value, images }) {
   try {
     const existUser = await UserQueries.existedUser(value.username);
     if (existUser) {
@@ -16,7 +16,7 @@ export const createUser = async ({ value, images }) => {
       {
         ...value,
       },
-      userImage,
+      userImage
     );
 
     const response = {
@@ -28,4 +28,6 @@ export const createUser = async ({ value, images }) => {
   } catch (error) {
     return { error: true, message: error };
   }
-};
+}
+
+// module.exports = { createUser };

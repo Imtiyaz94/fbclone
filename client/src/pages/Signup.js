@@ -1,5 +1,6 @@
 import React from 'react';
 import '../styles/signup.css';
+import { Link } from 'react-router-dom';
 
 const Signup = () => {
   return (
@@ -7,7 +8,7 @@ const Signup = () => {
       <div className='form-heading h2 text-center'>Sign Up</div>
       <form>
         <div className='mb-3'>
-          <label for='exampleInputEmail1' className='form-label'>
+          <label htmlFor='exampleInputEmail1' className='form-label'>
             Email address
           </label>
           <input
@@ -21,7 +22,7 @@ const Signup = () => {
           </div>
         </div>
         <div className='mb-3'>
-          <label for='exampleInputPassword1' className='form-label'>
+          <label htmlFor='exampleInputPassword1' className='form-label'>
             Password
           </label>
           <input
@@ -36,7 +37,7 @@ const Signup = () => {
             className='form-check-input'
             id='exampleCheck1'
           />
-          <label className='form-check-label' for='exampleCheck1'>
+          <label className='form-check-label' htmlFor='exampleCheck1'>
             Check me out
           </label>
         </div>
@@ -44,6 +45,13 @@ const Signup = () => {
           Submit
         </button>
       </form>
+      <p>
+        Have account{' '}
+        <Link to='/login' style={{ textDecoration: 'none' }}>
+          Signin
+        </Link>{' '}
+        here
+      </p>
     </div>
   );
 };

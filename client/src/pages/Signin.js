@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
 
 const Signin = () => {
@@ -27,7 +27,7 @@ const Signin = () => {
     // console.log('resData');
     try {
       const res = await axios.post(
-        'http://localhost:8001/api/auth/login',
+        'http://localhost:8000/api/auth/login',
         user,
       );
 
@@ -159,6 +159,13 @@ const Signin = () => {
         >
           Login
         </button>
+        <p>
+          Don't have account{' '}
+          <Link to='/register' style={{ textDecoration: 'none' }}>
+            Register
+          </Link>{' '}
+          here
+        </p>
       </form>
     </div>
   );

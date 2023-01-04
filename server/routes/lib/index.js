@@ -3,11 +3,17 @@ import { loginUserRoutes } from './loginUserRoutes.js';
 import { homeRoute } from './homeRoute.js';
 import { createPostRoute } from './createPostRoute.js';
 import { likePost } from './likeRoute.js';
+import showPostRoute from './showPostRoute.js';
 
-export {
+const postRoutes = {
+  createPostRoute,
+  likePost,
+  showPostRoute,
+};
+const userRoutes = {
   createUserRoute,
   loginUserRoutes,
   homeRoute,
-  createPostRoute,
-  likePost,
 };
+
+export { postRoutes, userRoutes };
