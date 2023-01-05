@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import  UserQueries  from '../../../../../db/queries/user/index.js';
+import UserQueries from '../../../../../db/queries/user/index.js';
 
 export const generateAuthToken = async (checkUser) => {
   const { _id } = checkUser;
@@ -13,7 +13,12 @@ export const generateAuthToken = async (checkUser) => {
     userId,
     expiryDate: time,
   });
-  return { error: false, message: 'token is created', newToken };
+  return {
+    error: false,
+    message: 'token is created',
+    token: newToken.token,
+    userId: userId._id,
+  };
 };
 
 export default generateAuthToken;

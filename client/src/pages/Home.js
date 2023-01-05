@@ -1,26 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Headers, Sidebar, Card } from '../components/index';
-import { Outlet } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Home = () => {
+  const navigate = useNavigate();
   const isLogged = localStorage.getItem('access_token');
-
+  // useEffect(() => {
+  //   if (!isLogged) {
+  //     navigate('/login');
+  //   }
+  // }, [navigate]);
   return (
     <div>
-      {isLogged ? (
-        <div className='container-fluid p-2'>
-          <Headers />
-          <div className='d-flex justify-content-evenly mt-3 shadow-sm'>
-            <Sidebar />
-            <div className='main shadow-sm rounded'>
-              <Card />
-            </div>
+      <div className='container-fluid p-2'>
+        <Headers />
+        <div className='d-flex justify-content-evenly mt-3 shadow-sm'>
+          <Sidebar />
+          <div className='main shadow-sm rounded'>
+            <Card />
+            {/* <List /> */}
           </div>
-          {/* <Outlet /> */}
         </div>
-      ) : (
-        <div>Token is expired</div>
-      )}
+        {/* <Outlet /> */}
+      </div>
     </div>
   );
 };

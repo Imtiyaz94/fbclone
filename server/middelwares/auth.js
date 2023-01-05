@@ -19,7 +19,7 @@ export const auth = async (req, res, next) => {
   console.log('expire token session', expireSession);
   if (expireSession) {
     const response = errorHandler('Token is Expired');
-    return res.status(403).send(response);
+    return res.status(401).send(response);
   }
 
   req.user = { userId: dbToken.userId };
