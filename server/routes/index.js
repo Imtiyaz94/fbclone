@@ -16,7 +16,7 @@ router.post('/login', userRoutes.loginUserRoutes);
 
 // routes for Post by user
 router.post(
-  '/:id/create_post',
+  '/create_post',
   auth,
   UserQueries.multerUploads.single('photos'),
   postRoutes.createPostRoute,

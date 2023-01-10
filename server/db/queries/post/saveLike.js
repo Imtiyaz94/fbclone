@@ -16,12 +16,17 @@ export const saveLike = async ({ userId, postId }) => {
   }
   if (likedUser) {
     await Like.findOneAndDelete({ postId: postId, userId: userId });
+    // await Like.updateOne({ liked: false });
     post.likeCount--;
     await post.save();
 
     return errorHandler(200, 'Post disliked');
   }
-  const likeCreate = await Like.create({ userId: userId, postId: postId });
+  const likeCreate = await Like.create({
+    userId: userId,
+    postId: postId,
+  });
+  await Like.updateOne({ liked: true });
   post.likeCount++;
   await post.save();
   return errorHandler(200, 'Post liked', likeCreate);

@@ -5,9 +5,10 @@ async function showPosts() {
     .sort('-createdAt')
     .populate('userId')
     .populate('_id');
-//   if (!users) {
-//     return res.status(201).send({ message: 'Not found' });
-//   }
+  //   if (!users) {
+  //     return res.status(201).send({ message: 'Not found' });
+  //   }
+  console.log('userpost', userPost);
   return userPost;
   // next();
 }

@@ -21,7 +21,7 @@ const Card = () => {
       })
       .then((res) => {
         setData(res.data.posts);
-        // console.log('users data', res.data.posts);
+        // console.log('users data', res.data);
       })
       .catch((err) => console.log(err));
   };
@@ -40,7 +40,7 @@ const Card = () => {
               <div className='card-body'>
                 <h5 className='card-title'>{item.userId.username}</h5>
                 <p className='card-text'>{item.text}</p>
-                <img src={item.photos[0]} className='card-img-top' alt='...' />
+                <img src={item.photos} className='card-img-top' alt='...' />
               </div>
               <div className='card-footer d-flex'>
                 <small className='text-muted '>{item.likeCount}</small>

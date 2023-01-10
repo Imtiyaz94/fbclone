@@ -43,7 +43,7 @@ export const createUserRoute = async (req, res) => {
     // const { path } = await req.file;
     const images = await req.file.filename;
 
-    // console.log('user photos', images);
+    console.log('user photos', images);
     if (error) {
       const response = errorHandler(error.message);
       return res.status(400).send(response);

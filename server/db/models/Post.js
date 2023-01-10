@@ -19,7 +19,8 @@ const PostSchema = new mongoose.Schema({
   },
   photos: [
     {
-      data: Buffer,
+      type: String,
+      // data: Buffer,
       // contentType: 'image/png',
     },
   ],
