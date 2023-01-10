@@ -10,7 +10,7 @@ const Signin = () => {
   const [user, setUser] = useState({
     email: '',
     password: '',
-  });
+  }); 
   // const [email, setEmail] = useState('');
   // const [password, setPassword] = useState('');
   const handleInput = (e) => {
@@ -30,7 +30,6 @@ const Signin = () => {
         'http://localhost:8000/api/auth/login',
         user,
       );
-
       // const token = localStorage.setItem(
       //   'access_token',
       //   JSON.stringify(res.data.token),

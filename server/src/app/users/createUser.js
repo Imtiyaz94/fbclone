@@ -16,7 +16,7 @@ export async function createUser({ value, images }) {
       {
         ...value,
       },
-      userImage
+      userImage,
     );
 
     const response = {

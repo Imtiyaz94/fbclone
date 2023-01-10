@@ -5,7 +5,7 @@ import showPosts from '../../src/app/posts/showPosts.js';
 async function showPostsRoutes(req, res, next) {
   //   const post = await PostQueries.findPost({ _id: req.params.id });
 
-  const showPost = await showPosts();
+  const postData = await showPosts();
   let posts = await Post.find()
     .sort('-createdAt')
     .populate('userId')
@@ -14,6 +14,7 @@ async function showPostsRoutes(req, res, next) {
   //   return res.status(201).send({ message: 'Not found' });
   // }
   // next();
-  return res.status(200).send({ posts: showPost });
+  const { userId, ...post } = postData;
+  return res.status(200).send({ posts: { ...post } });
 }
 export default showPostsRoutes;

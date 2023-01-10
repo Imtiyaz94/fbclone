@@ -14,12 +14,14 @@ export const auth = async (req, res, next) => {
       .status(403)
       .send({ error: true, message: 'Token not found in DB' });
   }
-  console.log('expiry date', dbToken);
+  // console.log('expiry date', dbToken);
   const expireSession = await auths.verifyExpirySession(dbToken.expiryDate);
-  console.log('expire token session', expireSession);
+  // console.log('expire token session', expireSession);
   if (expireSession) {
-    const response = errorHandler('Token is Expired');
-    return res.status(401).send(response);
+    // const response = errorHandler('Token is Expired');
+    return res
+      .status(401)
+      .send({ error: true, message: 'Token Expired' });
   }
 
   req.user = { userId: dbToken.userId };

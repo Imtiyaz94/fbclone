@@ -11,7 +11,7 @@ const Headers = () => {
     navigate('/login');
   };
   return (
-    <div className='header rounded'>
+    <div className='header rounded d-flex'>
       <h2>FB Clone</h2>
       <Post />
       <form>
