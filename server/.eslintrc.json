@@ -12,7 +12,7 @@
     },
     "rules": {
         "no-console": "off",
-        "quotes":["error","double", {"avoidEscape":true}],
+        "quotes":["error","single", {"avoidEscape":true}],
         "import/extensions":["never",{
             "ignorePackages": true,"pattern": {
                 "javascript": "ignorePackages"

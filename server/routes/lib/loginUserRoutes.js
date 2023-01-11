@@ -8,9 +8,9 @@ const schema = Joi.object({
 });
 // return schema.validate(data);
 
-export const loginUserRoutes = async (req, res) => {
+const loginUserRoutes = async (req, res) => {
   try {
-    const { error, value } = await schema.validate(req.body);
+    const { error, value } = schema.validate(req.body);
     console.log('value', value.email);
     if (error) {
       return res.status(400).send({ message: error.message });
@@ -30,3 +30,4 @@ export const loginUserRoutes = async (req, res) => {
     return res.status(400).send('Internal Server Error', error);
   }
 };
+export default loginUserRoutes;
