@@ -2,12 +2,20 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../styles/card.css';
 import Like from './Like';
+import swal from 'sweetalert';
+import { useNavigate } from 'react-router-dom';
+
 const Card = () => {
+  const navigate = useNavigate();
   const [data, setData] = useState({});
   const values = Object.keys(data).map((key) => data[key]);
   const getData = () => {
     const user = JSON.parse(localStorage.getItem('access_token'));
     const token = user.token;
+    if (!token) {
+      swal('Token Expired, Please Login Again', '', 'error');
+      navigate('/login');
+    }
     // const headers = {
     //   Authorization: `${token}`,
     //   'Content-Type': 'application/json',
