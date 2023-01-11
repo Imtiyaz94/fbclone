@@ -30,32 +30,32 @@ const schema = Joi.object({
     .equal(Joi.ref('password'))
     .required()
     .label('Confirm password')
-    .options({ messages: { 'any.only': '{{#label}} does not match' } }),
+    .options({ messages: { 'any.only': '{#label} does not match' } }),
   gender: Joi.string().trim(true),
-  // profilePic: Joi.string().label(
-  //   'Only .png, .jpg and .jpeg format are allowed',
-  // ),
+  profilePic: Joi.string().label('Only .png, .jpg and .jpeg format are allowed')
+    // Joi.array().only().label('Only .png, .jpg and .jpeg format are allowed'),
 });
 
-export const createUserRoute = async (req, res) => {
+const createUserRoute = async (req, res) => {
   try {
-    const { error, value } = await schema.validate(req.body);
+    const { error, value } = schema.validate(req.body);
     // const { path } = await req.file;
     const images = await req.file.filename;
+    console.log('joi value', value);
 
-    console.log('user photos', images);
+    console.log('joi photos', images);
     if (error) {
       const response = errorHandler(error.message);
       return res.status(400).send(response);
     }
 
-    const createUsers = await createUser({ value, images });
+    const newUser = await createUser({ value, images });
     if (!createUser) {
       const response = errorHandler(error.message);
       return res.status(400).send(response);
     }
     const response = {
-      createUsers,
+      newUser,
     };
     return res.status(200).send(response);
   } catch (error) {
@@ -64,3 +64,4 @@ export const createUserRoute = async (req, res) => {
     return res.status(400).send(response);
   }
 };
+export default createUserRoute;

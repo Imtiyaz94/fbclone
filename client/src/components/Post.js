@@ -10,84 +10,37 @@ const Post = () => {
   const [text, setText] = useState('');
   const [img, setImg] = useState('');
 
-  const handleSubmit = () => {
-    const user = JSON.parse(localStorage.getItem('access_token'));
+  const handleSubmit = async () => {
+    const user = await JSON.parse(localStorage.getItem('access_token'));
     const token = user.token;
+    // console.log(token);
     const formdata = new FormData();
     formdata.append('text', text);
     formdata.append('photos', img);
-    // const headers = {
-    //   Authorization: `${token}`,
-    //   'Content-Type': 'application/json',
-    // };
-    axios
-      .post('http://localhost:8000/api/auth/create_post', {
-        data: { text: text, photos: img },
-        headers: {
-          Authorization: `${token}`,
-          'Content-Type': 'application/json',
-        },
-      })
+    axios({
+      method: 'POST',
+      url: 'http://localhost:8000/api/auth/create_post',
+      data: formdata,
+      headers: {
+        Authorization: `${token}`,
+        'content-type': 'multipart/form-data',
+      },
+    })
       .then((res) => {
-        // setData(res.data.posts);
         console.log('token', res.headers);
         console.log('users data', res.data);
+        // setData(res.data.posts);
+        if (res.data) {
+          swal('Post Created successfully', '', 'success');
+          navigate('/');
+        }
       })
       .catch((err) => console.log(err));
   };
-  useEffect(() => {
-    handleSubmit();
-  }, []);
+  // useEffect(() => {
+  //   handleSubmit();
+  // }, []);
 
-  // async function handleSubmit(e) {
-  //   e.preventDefault();
-  //   // console.log('resData');
-  //   // try {
-  //   const userToken = await localStorage.getItem('access_token');
-  //   console.log('user token', userToken);
-  //   const user = await JSON.parse(userToken.token);
-  //   const url = `http://localhost:8000/api/auth/create_post`;
-  //   const body = {
-  //     text: text,
-  //     photos: img,
-  //   };
-  //   const header = {
-  //     Authorization: `${user}`,
-  //   };
-  //   await axios
-  //     .post(url, body, { headers: header })
-  //     .then((res) => {
-  //       console.log('data', res.headers);
-  //       if (res.data) {
-  //         console.log('data', res.data);
-  //         localStorage.setItem('access_token', JSON.stringify(res.data));
-  //         navigate('/');
-  //         swal('Post Created Successfully', '', 'success');
-  //       } else {
-  //         swal('Invalid credentials or User does not exist', '', 'error');
-  //       }
-  //       navigate('/');
-  //       swal('Post Created Successfully', '', 'success');
-  //     })
-  //     .catch((error) => console.log(error));
-  // const token = localStorage.setItem(
-  //   'access_token',
-  //   JSON.stringify(res.data.token),
-  // );
-  // setToken(token);
-  // setError(res.data.message);
-  // if (res.data) {
-  //   console.log('data', res.data);
-  //   localStorage.setItem('access_token', JSON.stringify(res.data));
-  //   navigate('/');
-  //   swal('Post Created Successfully', '', 'success');
-  // } else {
-  //   swal('Invalid credentials or User does not exist', '', 'error');
-  // }
-  // } catch (error) {
-  //   console.log('error', error);
-  // }
-  // }
   return (
     <div className='container '>
       <form onSubmit={handleSubmit} encType='multipart/form-data'>
@@ -110,7 +63,7 @@ const Post = () => {
               // value={user.password}
               className='form-control'
               id='file'
-              onChange={(e) => setImg(e.target.files)}
+              onChange={(e) => setImg(e.target.files[0])}
               required
             />
           </div>

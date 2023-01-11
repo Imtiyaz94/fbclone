@@ -11,7 +11,7 @@ export async function createUser({ value, images }) {
       return { error: true, message: 'Mail already exists' };
     }
     const userImage = await images;
-    // console.log('userimage', userImage);
+    console.log('userimage', userImage);
     const newUser = await UserQueries.saveUser(
       {
         ...value,

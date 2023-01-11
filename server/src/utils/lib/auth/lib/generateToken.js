@@ -16,6 +16,7 @@ export const generateAuthToken = async (checkUser) => {
   return {
     error: false,
     message: 'token is created',
+    isDelete:true,
     token: newToken.token,
     userId: userId._id,
   };
