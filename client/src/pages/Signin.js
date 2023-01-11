@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, redirect } from 'react-router-dom';
 import swal from 'sweetalert';
 
 const Signin = () => {
@@ -10,7 +10,7 @@ const Signin = () => {
   const [user, setUser] = useState({
     email: '',
     password: '',
-  }); 
+  });
   // const [email, setEmail] = useState('');
   // const [password, setPassword] = useState('');
   const handleInput = (e) => {
@@ -38,8 +38,8 @@ const Signin = () => {
       setError(res.data.message);
       if (res.data.token) {
         localStorage.setItem('access_token', JSON.stringify(res.data.token));
-        navigate('/');
         swal('User logged in successfully', '', 'success');
+        navigate('/');
       } else {
         swal('Invalid credentials or User does not exist', '', 'error');
       }
