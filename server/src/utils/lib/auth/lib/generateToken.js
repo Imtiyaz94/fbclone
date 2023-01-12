@@ -7,7 +7,7 @@ export const generateAuthToken = async (checkUser) => {
   // console.log('payload', _id);
   const accessToken = await jwt.sign({ _id }, process.env.PRIVATE_KEY);
   const expiredAt = new Date();
-  const time = expiredAt.setSeconds(expiredAt.getSeconds() + 1800);
+  const time = expiredAt.setSeconds(expiredAt.getSeconds() + 900);
   const newToken = await UserQueries.saveToken({
     accessToken,
     userId,
@@ -16,7 +16,7 @@ export const generateAuthToken = async (checkUser) => {
   return {
     error: false,
     message: 'token is created',
-    isDelete:true,
+    isDelete: true,
     token: newToken.token,
     userId: userId._id,
   };

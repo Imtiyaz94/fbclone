@@ -9,17 +9,11 @@ const Card = () => {
   const navigate = useNavigate();
   const [data, setData] = useState({});
   const values = Object.keys(data).map((key) => data[key]);
+  console.log('values', values);
   const getData = () => {
     const user = JSON.parse(localStorage.getItem('access_token'));
     const token = user.token;
-    if (!token) {
-      swal('Token Expired, Please Login Again', '', 'error');
-      navigate('/login');
-    }
-    // const headers = {
-    //   Authorization: `${token}`,
-    //   'Content-Type': 'application/json',
-    // };
+
     axios
       .get('http://localhost:8000/api/auth/posts', {
         headers: {
@@ -28,10 +22,22 @@ const Card = () => {
         },
       })
       .then((res) => {
-        setData(res.data.posts);
-        // console.log('users data', res.data);
+        setData(res.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        if (err.response.data.error === true) {
+          localStorage.removeItem('access_token');
+          swal({
+            title: 'Token Expired',
+            text: 'Redirecting to login page...',
+            content: '',
+            icon: 'success',
+          }).then(function () {
+            window.location.reload();
+          });
+          navigate('/login');
+        }
+      });
   };
   useEffect(() => {
     getData();
@@ -46,7 +52,7 @@ const Card = () => {
           return (
             <div className='card w-50 h-100 shadow ' id='card' key={item._id}>
               <div className='card-body'>
-                <h5 className='card-title'>{item.userId.username}</h5>
+                <h4 className='card-title'>{item.userId.username}</h4>
                 <p className='card-text'>{item.text}</p>
                 <img src={item.photos} className='card-img-top' alt='...' />
               </div>

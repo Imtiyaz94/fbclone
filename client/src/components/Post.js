@@ -1,22 +1,29 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
+import { convertToBase64 } from '../utils/index';
 
 const Post = () => {
-  const userId = useParams();
-  // console.log('userid', userId);
   const navigate = useNavigate();
   const [text, setText] = useState('');
   const [img, setImg] = useState('');
 
+  const handleFile = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertToBase64(file);
+    console.log(base64);
+    setImg(base64);
+  };
+
   const handleSubmit = async () => {
     const user = await JSON.parse(localStorage.getItem('access_token'));
     const token = user.token;
-    // console.log(token);
+    console.log('uploaded', img);
     const formdata = new FormData();
     formdata.append('text', text);
     formdata.append('photos', img);
+    console.log('formdata', formdata);
     axios({
       method: 'POST',
       url: 'http://localhost:8000/api/auth/create_post',
@@ -27,13 +34,15 @@ const Post = () => {
       },
     })
       .then((res) => {
-        console.log('token', res.headers);
+        // console.log('token', res.headers);
         console.log('users data', res.data);
-        // setData(res.data.posts);
-        if (res.data) {
-          swal('Post Created successfully', '', 'success');
-          navigate('/');
-        }
+
+        swal({
+          title: 'Post Created Successfully',
+          // text: 'Redirecting to login page...',
+          content: '',
+          icon: 'success',
+        });
       })
       .catch((err) => console.log(err));
   };
@@ -43,9 +52,9 @@ const Post = () => {
 
   return (
     <div className='container '>
-      <form onSubmit={handleSubmit} encType='multipart/form-data'>
-        <div className='row g-3'>
-          <div className='col'>
+      <form onSubmit={(e) => handleSubmit(e)}>
+        <div className='row g-3 p-2'>
+          <div className='col-6'>
             <textarea
               type='text'
               className='form-control'
@@ -56,15 +65,17 @@ const Post = () => {
               required
             />
           </div>
-          <div className='col'>
+          <div className='col-3'>
             <input
               type='file'
               name='file'
               // value={user.password}
               className='form-control'
               id='file'
-              onChange={(e) => setImg(e.target.files[0])}
+              onChange={handleFile}
               required
+              accept='.jpg, .png, .jpeg'
+              multiple
             />
           </div>
         </div>

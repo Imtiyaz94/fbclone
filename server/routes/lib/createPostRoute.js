@@ -10,7 +10,7 @@ const schema = Joi.object({
 export const createPostRoute = async (req, res, next) => {
   try {
     const { error, value } = schema.validate(req.body);
-    const images = await req.file.filename;
+    const images = await req.body.photos;
     // console.log('images', images);
     if (error) {
       const response = errorHandler(error.message);

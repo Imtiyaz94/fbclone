@@ -13,6 +13,7 @@ router.post(
   userRoutes.createUserRoute,
 );
 router.post('/login', userRoutes.loginUserRoutes);
+router.get('/:id', auth, userRoutes.userDetailsRoute);
 
 // routes for Post by user
 router.post(

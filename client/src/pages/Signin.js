@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate, redirect } from 'react-router-dom';
 import swal from 'sweetalert';
@@ -38,7 +38,15 @@ const Signin = () => {
       setError(res.data.message);
       if (res.data.token) {
         localStorage.setItem('access_token', JSON.stringify(res.data.token));
-        swal('User logged in successfully', '', 'success');
+
+        swal({
+          title: 'Login Successfully',
+          text: 'Redirecting to home page...',
+          content: '',
+          icon: 'success',
+        }).then(function () {
+          window.location.reload();
+        });
         navigate('/');
       } else {
         swal('Invalid credentials or User does not exist', '', 'error');
@@ -48,11 +56,13 @@ const Signin = () => {
       console.log(error, 'error');
     }
   }
-
+  // useEffect((e) => {
+  //   handleSubmit(e);
+  // }, []);
   return (
     <div className='container mt-5 p-3 shadow-sm ' id='signup-form'>
       <div className='form-heading h2 text-center'>Sign In</div>
-      <form>
+      <form onSubmit={(e) => handleSubmit(e)}>
         <div className='mb-3'>
           <label htmlFor='email' className='form-label'>
             Email address
@@ -87,7 +97,7 @@ const Signin = () => {
         </div>
         <button
           type='submit'
-          onClick={handleSubmit}
+          // onClick={handleSubmit}
           className='btn btn-primary'
         >
           Login
