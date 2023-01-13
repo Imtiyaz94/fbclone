@@ -2,6 +2,7 @@ import express from 'express';
 import { userRoutes, postRoutes } from './lib/index.js';
 import { auth } from '../middelwares/auth.js';
 import UserQueries from '../db/queries/user/index.js';
+import PostQueries from '../db/queries/post/index.js';
 
 const router = express.Router();
 
@@ -13,6 +14,7 @@ router.post(
   userRoutes.createUserRoute,
 );
 router.post('/login', userRoutes.loginUserRoutes);
+router.get('/user/:id', auth, userRoutes.userDetailsRoute);
 
 // routes for Post by user
 router.post(
@@ -21,9 +23,9 @@ router.post(
   UserQueries.multerUploads.single('photos'),
   postRoutes.createPostRoute,
 );
-router.get('/posts', auth, postRoutes.showPostRoute);
 
 // routes for Like by user
 router.post('/:id/like', auth, postRoutes.likePost);
+router.get('/showposts', auth, postRoutes.showPostRoute);
 
 export default router;

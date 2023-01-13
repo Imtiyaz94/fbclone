@@ -4,10 +4,6 @@ import path from 'path';
 const PHOTO_PATH = path.join('../../uploads/post');
 
 const PostSchema = new mongoose.Schema({
-  userId: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-  },
   likes: [
     {
       type: Schema.Types.ObjectId,
@@ -27,6 +23,10 @@ const PostSchema = new mongoose.Schema({
   likeCount: {
     type: Number,
     default: 0,
+  },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
   },
   createdAt: {
     type: Number,

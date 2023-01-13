@@ -8,10 +8,10 @@ import CustomAxios from './utils/CustomAxios';
 // const { Header, Footer, Sider, Content } = Layout;
 
 function App() {
-const isLogged  = localStorage.getItem('access_token')
-  
+  const isLogged = localStorage.getItem('access_token');
+
   return (
-    <div>
+    <div className='container-fluid'>
       <Routes>
         <Route
           path='/'

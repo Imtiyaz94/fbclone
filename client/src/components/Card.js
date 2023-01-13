@@ -9,29 +9,43 @@ const Card = () => {
   const navigate = useNavigate();
   const [data, setData] = useState({});
   const values = Object.keys(data).map((key) => data[key]);
+  // console.log('values', data);
   const getData = () => {
     const user = JSON.parse(localStorage.getItem('access_token'));
     const token = user.token;
-    if (!token) {
-      swal('Token Expired, Please Login Again', '', 'error');
-      navigate('/login');
-    }
-    // const headers = {
-    //   Authorization: `${token}`,
-    //   'Content-Type': 'application/json',
-    // };
+
     axios
-      .get('http://localhost:8000/api/auth/posts', {
+      .get('http://localhost:8000/api/auth/showposts', {
         headers: {
           Authorization: `${token}`,
           'Content-Type': 'application/json',
         },
       })
       .then((res) => {
+        // console.log('post res', res.data);
         setData(res.data.posts);
-        // console.log('users data', res.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        if (err.response.data.error === true) {
+          localStorage.removeItem('access_token');
+          swal({
+            title: 'Token Expired',
+            text: 'Redirecting to login page...',
+            content: '',
+            icon: 'success',
+          }).then(function () {
+            window.location.reload();
+          });
+          navigate('/login');
+        }
+      });
+  };
+
+  const postDate = (date) => {
+    return new Date(date).toLocaleString().split(',');
+  };
+  const capName = (name) => {
+    return name.toUpperCase();
   };
   useEffect(() => {
     getData();
@@ -46,13 +60,36 @@ const Card = () => {
           return (
             <div className='card w-50 h-100 shadow ' id='card' key={item._id}>
               <div className='card-body'>
-                <h5 className='card-title'>{item.userId.username}</h5>
+                <span
+                  className='d-flex mb-4'
+                  style={{ display: 'inline-block' }}
+                >
+                  <img
+                    src={item.userId.profilePic}
+                    className='user_img me-3'
+                    alt='...'
+                  />
+                  <h4 className='card-title'>{item.userId.username}</h4>
+                </span>
+                <figure>
+                  <figcaption className='blockquote-footer'>
+                    <cite title='Source Title'>
+                      Posted At : {postDate(item.createdAt)}
+                    </cite>
+                  </figcaption>
+                </figure>
+                {/* <p className='card-text'>Posted At: {item.createdAt}</p> */}
                 <p className='card-text'>{item.text}</p>
                 <img src={item.photos} className='card-img-top' alt='...' />
               </div>
               <div className='card-footer d-flex'>
                 <small className='text-muted '>{item.likeCount}</small>
-                <Like />
+                <img
+                  src={item.userId.profilePic}
+                  className='like_img me-3'
+                  alt='...'
+                />
+                <Like postId={item._id} userId={item.userId._id} />
               </div>
             </div>
           );

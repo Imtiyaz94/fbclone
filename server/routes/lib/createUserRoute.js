@@ -40,8 +40,8 @@ const createUserRoute = async (req, res) => {
   try {
     const { error, value } = schema.validate(req.body);
     // const { path } = await req.file;
-    const images = await req.file.filename;
-    console.log('joi value', value);
+    const images = await req.body.profilePic;
+    // console.log('joi value', value);
 
     console.log('joi photos', images);
     if (error) {

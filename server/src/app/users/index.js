@@ -1,2 +1,4 @@
 import { createUser } from './createUser.js';
-export { createUser };
+import showUser from './showUser.js';
+
+export { createUser, showUser };

@@ -3,6 +3,7 @@ import '../styles/signup.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import swal from 'sweetalert';
+import { convertToBase64 } from '../utils';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -30,7 +31,12 @@ const Signup = () => {
   //     [name]: value,
   //   });
   // };
-
+  const handleFile = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertToBase64(file);
+    console.log(base64);
+    setImg(base64);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log(e.target.value);
@@ -56,8 +62,15 @@ const Signup = () => {
       .then((res) => {
         // console.log('response of signup', res.data.newUser);
         if (res.data.newUser.error === false) {
-          swal('User Created successfully', '', 'success');
-          navigate('/');
+          swal({
+            title: 'User Created Successfully',
+            text: 'Redirecting to login page...',
+            content: '',
+            icon: 'success',
+          }).then(function () {
+            window.location.reload();
+          });
+          navigate('/login');
         }
         setError(res.data.newUser);
       })
@@ -176,7 +189,7 @@ const Signup = () => {
             className='form-control'
             aria-describedby='profilePic'
             id='profilePic'
-            onChange={(e) => setImg(e.target.files[0])}
+            onChange={handleFile}
             required
           />
         </div>

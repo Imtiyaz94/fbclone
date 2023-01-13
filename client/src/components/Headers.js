@@ -8,8 +8,14 @@ const Headers = () => {
   const logOut = () => {
     // const getToken = localStorage.getItem('access_token');
     localStorage.removeItem('access_token');
-    // console.log('token', token, getToken);
-    swal('Logout successfully', '', 'success');
+    swal({
+      title: 'Logout Successfully',
+      text: 'Redirecting to login page...',
+      content: '',
+      icon: 'success',
+    }).then(function () {
+      window.location.reload();
+    });
     navigate('/login');
   };
   return (
