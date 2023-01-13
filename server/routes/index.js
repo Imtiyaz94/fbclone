@@ -23,9 +23,9 @@ router.post(
   UserQueries.multerUploads.single('photos'),
   postRoutes.createPostRoute,
 );
+router.get('/showposts', auth, postRoutes.showPostRoute);
 
 // routes for Like by user
 router.post('/:id/like', auth, postRoutes.likePost);
-router.get('/showposts', auth, postRoutes.showPostRoute);
 
 export default router;
