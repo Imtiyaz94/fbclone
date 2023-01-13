@@ -3,11 +3,13 @@ import { AiFillLike } from 'react-icons/ai';
 import '../styles/like.css';
 import axios from 'axios';
 import swal from 'sweetalert';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import convertToBase64 from '../utils/index';
 
-const Like = () => {
-  const postId = useParams();
+const Like = ({ postId, userId }) => {
+  // const postId = useParams();
+  const navigate = useNavigate();
+  console.log('all postid', postId, userId);
   const [liked, setLiked] = useState(false);
 
   const handleSubmit = async () => {
@@ -26,16 +28,33 @@ const Like = () => {
     })
       .then((res) => {
         // console.log('token', res.headers);
-        console.log('users data');
 
         swal({
           title: 'Post liked',
           // text: 'Redirecting to login page...',
           content: '',
           icon: 'success',
+        }).then(function () {
+          window.location.reload();
         });
+        navigate('/');
+        console.log('users data', res.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        if (err.response.data.error === true) {
+          localStorage.removeItem('access_token');
+          swal({
+            title: 'Token Expired',
+            text: 'Redirecting to login page...',
+            content: '',
+            icon: 'success',
+          }).then(function () {
+            window.location.reload();
+          });
+          navigate('/login');
+        }
+      });
   };
   // useEffect(() => {
   //   handleSubmit();

@@ -4,19 +4,16 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const Home = () => {
   return (
-    <div>
-      <div className='container-fluid p-2'>
-        <Headers />
-        <div className='d-flex justify-content-evenly mt-3 shadow-sm'>
-          <Sidebar />
-          <div className='main shadow-sm rounded'>
-            
-            <Card />
-            {/* <List /> */}
-          </div>
+    <div className='container-fluid'>
+      <Headers />
+      <div className='d-flex justify-content-evenly mt-1 shadow-sm'>
+        <Sidebar />
+        <div className='main shadow-sm rounded'>
+          <Card />
+          {/* <List /> */}
         </div>
-        {/* <Outlet /> */}
       </div>
+      {/* <Outlet /> */}
     </div>
   );
 };

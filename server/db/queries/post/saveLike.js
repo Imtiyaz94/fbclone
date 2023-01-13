@@ -8,7 +8,7 @@ export const saveLike = async ({ userId, postId }) => {
     'userId',
     'likeCount',
   ]);
-  const likedUser = await Like.findOne({ userId: userId, postId: post._id });
+  const likedUser = await Like.findOne({ userId: userId, postId: postId });
   // console.log('liked user', likedUser);
 
   if (!post) {

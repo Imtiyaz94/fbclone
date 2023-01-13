@@ -74,7 +74,7 @@ const Post = () => {
               id='file'
               onChange={handleFile}
               required
-              accept='.jpg, .png, .jpeg'
+              // accept='.jpg, .png, .jpeg'
               multiple
             />
           </div>

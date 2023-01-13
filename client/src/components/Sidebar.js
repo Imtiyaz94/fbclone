@@ -13,14 +13,14 @@ const Sidebar = () => {
     const token = user.token;
 
     axios
-      .get(`http://localhost:8000/api/auth/${userId}`, {
+      .get(`http://localhost:8000/api/auth/user/${userId}`, {
         headers: {
           Authorization: `${token}`,
           'Content-Type': 'application/json',
         },
       })
       .then((res) => {
-        console.log('user in home', res.data.user);
+        console.log('user in like', res.data);
         setData(res.data);
       })
       .catch((err) => {
@@ -42,25 +42,29 @@ const Sidebar = () => {
   useEffect(() => {
     getData();
   }, []);
-
+  const capName = (name) => {
+    return name.toUpperCase();
+  };
   return (
-    <div className='sidebar sticky-top shadow-sm rounded '>
+    <div className='sidebar d-flex center sticky-top shadow-sm rounded '>
       {values ? (
         values &&
         values.map((item) => {
           // console.log('item', item);
           return (
-            <div className='card  shadow sticky-top' id='card' key={item._id}>
-              <div className='card-body'>
+            <div className='card shadow sticky-top' id='card' key={item._id}>
+              <div className='card-body '>
                 <img
                   src={item.profilePic}
                   className='img-fluid img-thumbnail'
                   id='profilePic'
                   alt='...'
                 />
-                <h4 className='card-title'>{item.username}</h4>
-                <p className='card-text'>{item.email}</p>
-                <p className='card-text'>{item.gender}</p>
+                <div className='mt-3'>
+                  <p className='card-title h3'>{item.username}</p>
+                  <p className='card-text'>{item.email}</p>
+                  <p className='card-text'>{capName(item.gender)}</p>
+                </div>
               </div>
             </div>
           );
