@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AiFillLike } from 'react-icons/ai';
+import { AiFillLike, AiOutlineLike } from 'react-icons/ai';
 import '../styles/like.css';
 import axios from 'axios';
 import swal from 'sweetalert';
@@ -29,19 +29,31 @@ const Like = ({ postId, userId }) => {
       .then((res) => {
         // console.log('token', res.headers);
 
-        swal({
-          title: 'Post liked',
-          // text: 'Redirecting to login page...',
-          content: '',
-          icon: 'success',
-        }).then(function () {
-          window.location.reload();
-        });
-        navigate('/');
-        console.log('users data', res.data);
+        if (res.data.savedLike.error === false) {
+          swal({
+            title: 'Post liked',
+            content: '',
+            icon: 'success',
+          }).then(function () {
+            window.location.reload();
+          });
+          setLiked(true);
+          navigate('/');
+        } else {
+          swal({
+            title: 'Post Disliked',
+            content: '',
+            icon: 'success',
+          }).then(function () {
+            window.location.reload();
+          });
+          setLiked(false);
+          navigate('/');
+        }
+        console.log('users data', res.data.savedLike);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         if (err.response.data.error === true) {
           localStorage.removeItem('access_token');
           swal({
@@ -61,9 +73,15 @@ const Like = ({ postId, userId }) => {
   // }, []);
   return (
     <div>
-      <button className='likeBtn' onClick={handleSubmit}>
-        <AiFillLike />
-      </button>
+      {liked ? (
+        <button className='likeBtn' onClick={handleSubmit}>
+          {<AiFillLike />}
+        </button>
+      ) : (
+        <button className='likeBtn' onClick={handleSubmit}>
+          {<AiOutlineLike />}
+        </button>
+      )}
     </div>
   );
 };
