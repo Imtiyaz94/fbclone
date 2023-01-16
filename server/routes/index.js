@@ -27,5 +27,5 @@ router.get('/showposts', auth, postRoutes.showPostRoute);
 
 // routes for Like by user
 router.post('/:id/like', auth, postRoutes.likePost);
-
+router.get('/:id/liked', auth, postRoutes.getLikeUserRoute);
 export default router;

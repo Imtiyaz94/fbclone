@@ -19,15 +19,17 @@ export const saveLike = async ({ userId, postId }) => {
     // await Like.updateOne({ liked: false });
     post.likeCount--;
     await post.save();
-
-    return errorHandler(200, 'Post disliked');
+    return { error: true, message: 'Post Disliked' };
+    // return errorHandler(201, 'Post disliked');
   }
   const likeCreate = await Like.create({
     userId: userId,
     postId: postId,
+    liked: true,
   });
-  await Like.updateOne({ liked: true });
+  // await Like.updateOne({ liked: true });
   post.likeCount++;
   await post.save();
-  return errorHandler(200, 'Post liked', likeCreate);
+  return { error: false, message: 'Post Liked', likeCreate };
 };
+// return errorHandler(200, 'Post liked', likeCreate);

@@ -83,12 +83,12 @@ const Card = () => {
                 <img src={item.photos} className='card-img-top' alt='...' />
               </div>
               <div className='card-footer d-flex'>
-                <small className='text-muted '>{item.likeCount}</small>
                 <img
                   src={item.userId.profilePic}
                   className='like_img me-3'
                   alt='...'
                 />
+                <small className='text-muted '>{item.likeCount}</small>
                 <Like postId={item._id} userId={item.userId._id} />
               </div>
             </div>

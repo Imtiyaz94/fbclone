@@ -17,10 +17,10 @@
 }
 #profilePic{
     background-size: cover;
-    /* height: 50% !important; */
-    /* border-radius: 50% !important; */
-    background-repeat: no-repeat;
-    
+    height: auto ;
+    max-height: 65% ;
+    width: 100% !important;
+    object-fit: cover;    
 }
 
 /* main styles here */
