@@ -1,6 +1,6 @@
-import Post from '../../db/models/Post.js';
-import PostQueries from '../../db/queries/post/index.js';
-import showPosts from '../../src/app/posts/showPosts.js';
+import Post from '../../../db/models/Post.js';
+import PostQueries from '../../../db/queries/post/index.js';
+import showPosts from '../../../src/app/posts/showPosts.js';
 
 async function showPostsRoute(req, res, next) {
   // const posts = await PostQueries.findPost({ _id: req.params.id });

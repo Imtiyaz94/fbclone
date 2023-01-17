@@ -7,7 +7,7 @@ export const generateAuthToken = async (checkUser) => {
   // console.log('payload', _id);
   const accessToken = await jwt.sign({ _id }, process.env.PRIVATE_KEY);
   const expiredAt = new Date();
-  const time = expiredAt.setSeconds(expiredAt.getSeconds() + 900);
+  const time = expiredAt.setSeconds(expiredAt.getSeconds() + 300); // 1800sec = 30min
   const newToken = await UserQueries.saveToken({
     accessToken,
     userId,

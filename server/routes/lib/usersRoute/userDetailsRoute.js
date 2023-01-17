@@ -1,5 +1,5 @@
-import UserQueries from '../../db/queries/user/index.js';
-import showUser from '../../src/app/users/showUser.js';
+import UserQueries from '../../../db/queries/user/index.js';
+import showUser from '../../../src/app/users/showUser.js';
 
 async function userDetailsRoute(req, res, next) {
   //   const post = await PostQueries.findPost({ _id: req.params.id });

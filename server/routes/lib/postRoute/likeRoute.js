@@ -1,5 +1,5 @@
-import { createLike } from '../../src/app/posts/index.js';
-import { errorHandler } from '../../src/utils/lib/errors/errorHandling.js';
+import { createLike } from '../../../src/app/posts/index.js';
+import { errorHandler } from '../../../src/utils/lib/errors/errorHandling.js';
 
 export const likePost = async (req, res) => {
   try {

@@ -1,18 +1,27 @@
-import loginUserRoutes from './loginUserRoutes.js';
+// Home Routes here
 import { homeRoute } from './homeRoute.js';
-import { createPostRoute } from './createPostRoute.js';
-import { likePost } from './likeRoute.js';
-import showPostRoute from './showPostRoute.js';
-import createUserRoute from './createUserRoute.js';
-import userDetailsRoute from './userDetailsRoute.js';
-import { getLikeUserRoute } from './getLikedUserRoute.js';
+
+// User Routes here
+import loginUserRoutes from './usersRoute/loginUserRoutes.js';
+import userDetailsRoute from './usersRoute/userDetailsRoute.js';
+import createUserRoute from './usersRoute/createUserRoute.js';
+
+
+// Post and Like Route here
+import { createPostRoute } from './postRoute/createPostRoute.js';
+import { likePost } from './postRoute/likeRoute.js';
+import showPostRoute from './postRoute/showPostRoute.js';
+import { getLikeUserRoute } from './postRoute/getLikedUserRoute.js';
+import { deletePostRoute } from './postRoute/deletePostRoute.js';
 
 const postRoutes = {
   createPostRoute,
   likePost,
   showPostRoute,
-  getLikeUserRoute
+  getLikeUserRoute,
+  deletePostRoute
 };
+
 const userRoutes = {
   createUserRoute,
   loginUserRoutes,

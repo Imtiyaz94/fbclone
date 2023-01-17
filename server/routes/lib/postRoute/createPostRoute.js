@@ -1,7 +1,6 @@
 import Joi from 'joi';
-import { errorHandler } from '../../src/utils/lib/errors/errorHandling.js';
-import { createPosts } from '../../src/app/posts/index.js';
-
+import { createPosts } from '../../../src/app/posts/index.js';
+import { errorHandler } from '../../../src/utils/lib/errors/errorHandling.js';
 const schema = Joi.object({
   text: Joi.string().required().label('Post Section'),
   photos: Joi.any().label('Only .png, .jpg and .jpeg format are allowed'),

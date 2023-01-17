@@ -18,6 +18,13 @@ export const auth = async (req, res, next) => {
   // console.log('expiry date', dbToken);
   const expireSession = auths.verifyExpirySession(dbToken.expiryDate);
   // console.log('expire token session', expireSession);
+
+  // updating token time if user online
+  const newTime = new Date();
+  newTime.setHours(newTime.getHours() + 1);
+  const { _id } = dbToken;
+  UserQueries.tokenTimeUpdate({ _id, expiryDate: newTime });
+
   if (expireSession) {
     // const response = errorHandler('Token is Expired');
     return res.status(401).send({ error: true, message: 'Token Expired' });

@@ -15,11 +15,15 @@ export const saveLike = async ({ userId, postId }) => {
     return errorHandler(401, 'Post not found');
   }
   if (likedUser) {
-    await Like.findOneAndDelete({ postId: postId, userId: userId });
+    const disliked = await Like.findOneAndReplace(
+      { postId: postId, userId: userId },
+      { liked: false },
+      { new: true },
+    );
     // await Like.updateOne({ liked: false });
     post.likeCount--;
     await post.save();
-    return { error: true, message: 'Post Disliked' };
+    return { error: true, message: 'Post Disliked', disliked };
     // return errorHandler(201, 'Post disliked');
   }
   const likeCreate = await Like.create({

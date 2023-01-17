@@ -14,10 +14,17 @@ const LikeSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  isDeleted: {
+    type: Boolean,
+    default: false,
+  },
+  deletedAt: {
+    type: Number,
+    default: Date.now,
+  },
   createdAt: {
     type: Number,
     default: Date.now,
-    // expires: 30 * 86400, // 30days
   },
 });
 const Like = mongoose.model('Like', LikeSchema);
