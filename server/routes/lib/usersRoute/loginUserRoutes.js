@@ -1,6 +1,6 @@
 import Joi from 'joi';
-import { authenticate } from '../../src/utils/lib/auth/index.js';
-import { errorHandler } from '../../src/utils/lib/errors/errorHandling.js';
+import { authenticate } from '../../../src/utils/lib/auth/index.js';
+import { errorHandler } from '../../../src/utils/lib/errors/errorHandling.js';
 
 const schema = Joi.object({
   email: Joi.string().email().required().label('Email'),

@@ -1,7 +1,7 @@
 import Joi from 'joi';
 import { joiPasswordExtendCore } from 'joi-password';
-import { createUser } from '../../src/app/users/index.js';
-import { errorHandler } from '../../src/utils/lib/errors/errorHandling.js';
+import { createUser } from '../../../src/app/users/index.js';
+import { errorHandler } from '../../../src/utils/lib/errors/errorHandling.js';
 
 const joiPassword = Joi.extend(joiPasswordExtendCore);
 
@@ -32,8 +32,10 @@ const schema = Joi.object({
     .label('Confirm password')
     .options({ messages: { 'any.only': '{#label} does not match' } }),
   gender: Joi.string().trim(true),
-  profilePic: Joi.string().label('Only .png, .jpg and .jpeg format are allowed')
-    // Joi.array().only().label('Only .png, .jpg and .jpeg format are allowed'),
+  profilePic: Joi.string().label(
+    'Only .png, .jpg and .jpeg format are allowed',
+  ),
+  // Joi.array().only().label('Only .png, .jpg and .jpeg format are allowed'),
 });
 
 const createUserRoute = async (req, res) => {

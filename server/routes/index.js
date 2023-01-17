@@ -24,6 +24,7 @@ router.post(
   postRoutes.createPostRoute,
 );
 router.get('/showposts', auth, postRoutes.showPostRoute);
+router.delete('/delete_post/:id', auth, postRoutes.deletePostRoute)
 
 // routes for Like by user
 router.post('/:id/like', auth, postRoutes.likePost);
